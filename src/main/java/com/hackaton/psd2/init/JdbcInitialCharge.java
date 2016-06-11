@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 /**
  * @author cesarrodriguezmedina
- *
+ * Initialization of database
  */
 @Configuration
 public class JdbcInitialCharge implements CommandLineRunner {
