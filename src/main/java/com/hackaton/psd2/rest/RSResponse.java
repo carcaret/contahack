@@ -2,23 +2,25 @@ package com.hackaton.psd2.rest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.Optional;
 
 public class RSResponse {
 
-  private final int status;
+  private final HttpStatus status;
   private Optional<JsonNode> json;
 
-  public RSResponse(int status) {
+  public RSResponse(HttpStatus status) {
     this.status = status;
   }
 
-  public RSResponse(int status, JsonNode json) {
+  public RSResponse(HttpStatus status, JsonNode json) {
     this.status = status;
     this.json = Optional.of(json);
   }
 
-  public int getStatus() {
+  public HttpStatus getStatus() {
     return status;
   }
 

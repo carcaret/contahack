@@ -1,72 +1,83 @@
 package com.hackaton.psd2.rest;
 
-import java.io.IOException;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
-import javax.ws.rs.core.MediaType;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class RSClient {
 
-  private static final Client CLIENT = Client.create();
-  private static final ObjectMapper MAPPER = new ObjectMapper();
+  private final String uri;
+  private final HttpMethod method;
+  private final MediaType contentType;
+  private final String token;
+  private final HttpHeaders headers;
 
-  private final WebResource webResource;
-
-  private RSClient(WebResource webResource) {
-    this.webResource = webResource;
+  public RSClient(String uri, HttpMethod method, MediaType contentType, String token, HttpHeaders headers) {
+    this.uri = uri;
+    this.method = method;
+    this.contentType = contentType;
+    this.token = token;
+    this.headers = headers;
   }
 
-  public RSResponse get() {
-    try {
-      return buildResponse(webResource.get(ClientResponse.class));
-    } catch (Exception e) {
-      throw new RuntimeException(
-          String.format("Error while reading the GET response from %s", webResource.getURI()), e);
+  public RSResponse send() {
+    RestTemplate restTemplate = new RestTemplate();
+    if(!headers.containsKey(HttpHeaders.AUTHORIZATION)) {
+      headers.add("Authorization", String.format("DirectLogin token=\"%s\"", token));
     }
-  }
-
-  public RSResponse post(String request) {
-    try {
-      return buildResponse(webResource.post(ClientResponse.class, request));
-    } catch (Exception e) {
-      throw new RuntimeException(
-          String.format("Error while reading the POST response from %s", webResource.getURI()), e);
+    if(!headers.containsKey(HttpHeaders.CONTENT_TYPE)) {
+      headers.setContentType(contentType);
     }
-  }
-
-  private RSResponse buildResponse(ClientResponse response) throws IOException {
-    if (response.hasEntity()) {
-      return new RSResponse(response.getStatus(),
-          MAPPER.readTree(response.getEntity(String.class)));
+    ResponseEntity<JsonNode> response =
+        restTemplate.exchange(uri, method, new HttpEntity<byte[]>(headers), JsonNode.class);
+    if (response.hasBody()) {
+      return new RSResponse(response.getStatusCode(), response.getBody());
     } else {
-      return new RSResponse(response.getStatus());
+      return new RSResponse(response.getStatusCode());
     }
+
   }
 
   public static class Builder {
 
-    private WebResource webResource;
+    private String uri;
+    private HttpMethod method;
+    private MediaType contentType;
+    private String token;
+    private HttpHeaders headers = new HttpHeaders();
 
-    public Builder(String resource) {
-      webResource = CLIENT.resource(resource);
+    public Builder(String uri) {
+      this.uri = uri;
     }
 
-    public Builder type(MediaType mediaType) {
-      webResource.type(mediaType);
+    public Builder contentType(MediaType mediaType) {
+      this.contentType = mediaType;
+      return this;
+    }
+
+    public Builder method(HttpMethod method) {
+      this.method = method;
       return this;
     }
 
     public Builder token(String token) {
-      webResource.header("Authorization", String.format("DirectLogin token=\"%s\"", token));
+      this.token = token;
+      return this;
+    }
+
+    public Builder header(String name, String value) {
+      headers.add(name, value);
       return this;
     }
 
     public RSClient build() {
-      return new RSClient(this.webResource);
+      return new RSClient(uri, method, contentType, token, headers);
     }
 
   }
