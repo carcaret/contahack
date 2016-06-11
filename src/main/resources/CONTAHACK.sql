@@ -14,7 +14,7 @@ CREATE TABLE tags(name VARCHAR(255), description VARCHAR(255));
 
 
 DROP TABLE agrupaciones2tags IF EXISTS;
-CREATE TABLE agrupaciones2tags(agrupacion VARCHAR(255), tags VARCHAR(255));
+CREATE TABLE tags2agrupaciones(agrupacion VARCHAR(255), tags VARCHAR(255));
 
 
 
@@ -24,16 +24,20 @@ INSERT INTO customers(uid, first_name, last_name) VALUES ('cesinrm','Cesar','Rod
 INSERT INTO crentialInfo(uid, user_remote, pass_remote) VALUES ('cesinrm','cesinrm@gmail.com','falcons666');
 
 INSERT INTO agrupaciones(name, description) VALUES ('Gastos generales','Esto son los gastos generales');
-INSERT INTO agrupaciones(name, description) VALUES ('Gastos pareja','Esto son los gastos pareja');
+INSERT INTO agrupaciones(name, description) VALUES ('Ingresos','Esto son los gastos pareja');
 
-INSERT INTO tags(name, description) VALUES ('Comida','Esto son los gastos de comida');
-INSERT INTO tags(name, description) VALUES ('Luz','Esto son los gastos de luz');
-INSERT INTO tags(name, description) VALUES ('Agua','Esto son los gastos de agua');
+INSERT INTO tags(name, description) VALUES ('clientesIngresos','Esto son los Ingresos!!');
+INSERT INTO tags(name, description) VALUES ('proveedoresAlquileres','Esto son los gastos de alquiler');
+INSERT INTO tags(name, description) VALUES ('personalNominas','Esto son los gastos de nominas');
+INSERT INTO tags(name, description) VALUES ('proveedoresAgua','Esto son los gastos de Agua');
+INSERT INTO tags(name, description) VALUES ('pagoProveedor','Esto son los gastos de Agua');
 
 
-INSERT INTO agrupaciones2tags(agrupacion, tags) VALUES ('Gastos generales','Comida');
-INSERT INTO agrupaciones2tags(agrupacion, tags) VALUES ('Gastos generales','Luz');
-INSERT INTO agrupaciones2tags(agrupacion, tags) VALUES ('Gastos generales','Agua');
+INSERT INTO tags2agrupaciones(agrupacion, tags) VALUES ('Gastos generales','proveedoresAgua');
+INSERT INTO tags2agrupaciones(agrupacion, tags) VALUES ('Gastos generales','personalNominas');
+INSERT INTO tags2agrupaciones(agrupacion, tags) VALUES ('Gastos generales','pagoProveedor');
+INSERT INTO tags2agrupaciones(agrupacion, tags) VALUES ('Gastos generales','proveedoresAlquileres');
+INSERT INTO tags2agrupaciones(agrupacion, tags) VALUES ('Ingresos','clientesIngresos');
 
 
 
