@@ -16,6 +16,8 @@ CREATE TABLE tags(name VARCHAR(255), description VARCHAR(255));
 DROP TABLE agrupaciones2tags IF EXISTS;
 CREATE TABLE agrupaciones2tags(agrupacion VARCHAR(255), tags VARCHAR(255));
 
+
+
 INSERT INTO customers(uid, first_name, last_name) VALUES ('cesinrm','Cesar','Rodriguez');
 
 
