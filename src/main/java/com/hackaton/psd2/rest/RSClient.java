@@ -25,7 +25,7 @@ public class RSClient {
       return buildResponse(webResource.get(ClientResponse.class));
     } catch (Exception e) {
       throw new RuntimeException(
-          String.format("Error while reading the response from %s", webResource.getURI()), e);
+          String.format("Error while reading the GET response from %s", webResource.getURI()), e);
     }
   }
 
@@ -34,18 +34,18 @@ public class RSClient {
       return buildResponse(webResource.post(ClientResponse.class, request));
     } catch (Exception e) {
       throw new RuntimeException(
-              String.format("Error while reading the response from %s", webResource.getURI()), e);
+          String.format("Error while reading the POST response from %s", webResource.getURI()), e);
     }
   }
 
   private RSResponse buildResponse(ClientResponse response) throws IOException {
     if (response.hasEntity()) {
-      return new RSResponse(response.getStatus(), MAPPER.readTree(response.getEntity(String.class)));
+      return new RSResponse(response.getStatus(),
+          MAPPER.readTree(response.getEntity(String.class)));
     } else {
       return new RSResponse(response.getStatus());
     }
   }
-
 
   public static class Builder {
 
@@ -55,8 +55,8 @@ public class RSClient {
       webResource = CLIENT.resource(resource);
     }
 
-    public Builder accept(MediaType mediaType) {
-      webResource.accept(mediaType);
+    public Builder type(MediaType mediaType) {
+      webResource.type(mediaType);
       return this;
     }
 
@@ -70,4 +70,5 @@ public class RSClient {
     }
 
   }
+
 }
