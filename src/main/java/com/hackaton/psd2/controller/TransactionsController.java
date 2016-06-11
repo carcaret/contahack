@@ -16,27 +16,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
+import java.util.Optional;
 
 @RestController
-public class AccountController {
+public class TransactionsController {
 
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private TokenMap tokenMap;
 
-  @RequestMapping(value = "/accounts", method = RequestMethod.GET)
-  public JsonNode getAccounts(Principal principal) throws Exception {
+  private final String BANK_ID = "rbs";
+  private final String ACCOUNT_ID = "5dHBvPFLLbnnBi2fOYOy";
+  private final String VIEW_ID = "owner";
+
+  @RequestMapping(value = "/transactions", method = RequestMethod.GET)
+  public Optional<JsonNode> getTransactions() throws Exception {
 
     try {
-      RSClient rSC = new RSClient.Builder(URIs.MY_ACCOUNTS).method(HttpMethod.GET)
-          .contentType(MediaType.APPLICATION_JSON).token(tokenMap.getUserToken(""))
-          .build();
+      RSClient rSC = new RSClient.Builder(String.format(URIs.TRANSACTION_URL, BANK_ID, ACCOUNT_ID, VIEW_ID)).method(HttpMethod.GET)
+          .contentType(MediaType.APPLICATION_JSON).token(tokenMap.getUserToken("")).build();
       RSResponse rSR = rSC.send();
       HttpStatus statusCode = rSR.getStatus();
       if (statusCode == HttpStatus.OK || statusCode == HttpStatus.CREATED) {
-        return rSR.getJson().get();
+        return rSR.getJson();
       } else {
         log.error("Error en la respuesta de la peticion [" + statusCode + "]");
         throw new Exception("Error en la respuesta de la peticion [" + statusCode + "]");
