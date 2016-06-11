@@ -36,5 +36,5 @@ objectclass: inetOrgPerson
 cn: Cesar Rodriguez
 sn: Rodriguez
 uid: cesinrm
-userPassword: cesinpassword
+userPassword: cesinrm
 
