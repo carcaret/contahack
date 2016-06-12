@@ -1,0 +1,14 @@
+WEBVTT
+
+1
+00:00:00.100 --> 00:00:06.500
+Al acceder al back, después del login, podemos acceder a swagger para ver la documentación de las APIs que publicamos
+
+2
+00:00:07.000 --> 00:00:19.500
+Recuperamos la información de las cuentas del usuario logado
+
+3
+00:00:25.000 --> 00:00:37.000
+Ahora, por ejemplo, recuperemos las etiquetas asociadas a los movimientos de las cuentas
+Estas etiquetas pueden ser fijadas por el usuario (empresa) o por la IA del software
