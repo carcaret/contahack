@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.hackaton.psd2.filter.TokenFilter;
-import com.hackaton.psd2.security.TokenMap;
+import com.hackaton.psd2.security.impl.TokenMapImpl;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -30,7 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class ContahackApplication {
 
   @Autowired
-  private TokenMap tokenMap;
+  private TokenMapImpl tokenMap;
 
   public static void main(String[] args) {
     SpringApplication.run(ContahackApplication.class, args);

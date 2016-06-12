@@ -1,4 +1,4 @@
-package com.hackaton.psd2.security;
+package com.hackaton.psd2.security.impl;
 
 import org.springframework.stereotype.Component;
 
@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class TokenMap {
+public class TokenMapImpl {
 
     private static final Map<String, String> TOKENS = new ConcurrentHashMap<>();
 

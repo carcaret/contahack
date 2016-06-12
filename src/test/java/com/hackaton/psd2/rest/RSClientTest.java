@@ -8,7 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import com.hackaton.psd2.security.UserTokenMgr;
+import com.hackaton.psd2.security.impl.UserTokenMgrImpl;
 
 public class RSClientTest {
 
@@ -17,7 +17,7 @@ public class RSClientTest {
     RSClient client =
         new RSClient.Builder("https://apisandbox.openbankproject.com/obp/v2.0.0/users/current")
             .contentType(MediaType.APPLICATION_JSON).method(HttpMethod.GET)
-            .token(UserTokenMgr.getUserToken("alberto.gonzalez.perez.x.x@example.com", "b95eb3"))
+            .token(UserTokenMgrImpl.getUserToken("alberto.gonzalez.perez.x.x@example.com", "b95eb3"))
             .build();
     RSResponse response = client.send();
     Assert.assertEquals(HttpStatus.OK, response.getStatus());

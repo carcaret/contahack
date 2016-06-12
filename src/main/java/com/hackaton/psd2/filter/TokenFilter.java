@@ -2,9 +2,7 @@ package com.hackaton.psd2.filter;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,33 +11,29 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.filter.GenericFilterBean;
 
 import com.hackaton.psd2.dao.model.CredentialInfo;
 import com.hackaton.psd2.dao.repository.CredentialInfoRepository;
-import com.hackaton.psd2.security.TokenMap;
-import com.hackaton.psd2.security.UserTokenMgr;
+import com.hackaton.psd2.security.impl.TokenMapImpl;
+import com.hackaton.psd2.security.impl.UserTokenMgrImpl;
 
 public class TokenFilter extends GenericFilterBean {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private final TokenMap tokenMap;
+	private final TokenMapImpl tokenMap;
 
 	@Autowired
 	private CredentialInfoRepository bean;
 
-	public TokenFilter(TokenMap tokenMap) {
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	public TokenFilter(TokenMapImpl tokenMap) {
 		this.tokenMap = tokenMap;
 	}
-
-//	@Override
-//	public void init(FilterConfig filterConfig) throws ServletException {
-//
-////		bean = WebApplicationContextUtils.getRequiredWebApplicationContext(filterConfig.getServletContext())
-////				.getBean(CredentialInfoRepository.class);
-//	}
 
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
@@ -54,7 +48,12 @@ public class TokenFilter extends GenericFilterBean {
 			if (!user.isEmpty() && tokenMap.getUserToken(user) == null) {
 				CredentialInfo findOne = bean.findOneByUid(user);
 
-				tokenMap.setUserToken(user, UserTokenMgr.getUserToken(findOne != null ?findOne.getUserRemote() : "cesinrm@gmail.com", findOne != null ?findOne.getPassRemote() : "falcons666"));
+//				if (findOne == null)
+//					findOne = jdbcTemplate.queryForObject("SELECT * FROM crentialInfo WHERE UID=\"" + user + "\";", CredentialInfo.class);
+
+				tokenMap.setUserToken(user,
+						UserTokenMgrImpl.getUserToken(findOne != null ? findOne.getUserRemote() : "cesinrm@gmail.com",
+								findOne != null ? findOne.getPassRemote() : "falcons666"));
 			}
 		} catch (Exception e) {
 			log.error(String.format("No se pudo recuperar el token para el usuario %s", user), e);

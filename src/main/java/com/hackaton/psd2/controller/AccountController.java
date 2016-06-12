@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.hackaton.psd2.helper.URIs;
 import com.hackaton.psd2.rest.RSClient;
 import com.hackaton.psd2.rest.RSResponse;
-import com.hackaton.psd2.security.TokenMap;
+import com.hackaton.psd2.security.impl.TokenMapImpl;
 
 @RestController
 public class AccountController {
@@ -26,7 +26,7 @@ public class AccountController {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private TokenMap tokenMap;
+	private TokenMapImpl tokenMap;
 
 	@RequestMapping(value = "/accounts", method = RequestMethod.GET)
 	public JsonNode getAccounts(Principal principal) throws Exception {

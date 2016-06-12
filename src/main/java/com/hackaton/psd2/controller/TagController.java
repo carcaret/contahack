@@ -1,11 +1,6 @@
 package com.hackaton.psd2.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hackaton.psd2.helper.URIs;
-import com.hackaton.psd2.rest.RSClient;
-import com.hackaton.psd2.rest.RSResponse;
-import com.hackaton.psd2.security.TokenMap;
+import java.security.Principal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hackaton.psd2.helper.URIs;
+import com.hackaton.psd2.rest.RSClient;
+import com.hackaton.psd2.rest.RSResponse;
+import com.hackaton.psd2.security.impl.TokenMapImpl;
 
 @RestController
 @RequestMapping(value = "/tags")
@@ -29,7 +29,7 @@ public class TagController {
   private static final ObjectMapper MAPPER = new ObjectMapper();
 
   @Autowired
-  private TokenMap tokenMap;
+  private TokenMapImpl tokenMap;
 
   @RequestMapping(value = "/get", method = RequestMethod.GET)
   public JsonNode getTags(Principal principal) {
