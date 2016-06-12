@@ -23,8 +23,8 @@ public class TokenMapImpl implements TokenMap {
 
   @Override
   public String getUserToken(String user) {
-     return TOKENS.get(user);
-//    return TOKEN;
+  //   return TOKENS.get(user);
+    return TOKEN;
   }
 
 }
