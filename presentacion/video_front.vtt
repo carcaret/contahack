@@ -1,0 +1,16 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:04.000
+Al iniciar el front, después del login, se presenta el listado de cuentas registradas por el cliente (empresa)
+
+2
+00:00:04.200 --> 00:00:05.800
+Seleccionamos una de las cuentas
+
+3
+00:00:06.300 --> 00:00:13.900
+Los movimientos de la cuenta contienen información contable:
+etiquetas personalizadas por el cliente o asignadas por la aplicación
+Asignación a un grupo contable que facilite su exportación al programa contable correspondiente
+
