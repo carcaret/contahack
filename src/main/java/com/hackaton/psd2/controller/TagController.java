@@ -48,7 +48,8 @@ public class TagController {
     }
   }
 
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json",
+      consumes = "application/json")
   public JsonNode addTag(@RequestBody JsonNode json) {
     try {
       RSClient client = new RSClient.Builder(URIs.TAGS).contentType(MediaType.APPLICATION_JSON)
