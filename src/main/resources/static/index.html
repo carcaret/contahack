@@ -28,7 +28,8 @@
 
     <div>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
           <h2>Tus cuentas</h2>
           <div ng-controller="AccController" ng-repeat="acc in accounts" class="accounts">
           </div>
@@ -36,10 +37,14 @@
         <div class="col-md-8">
           <div class="movements" style="visibility: none;">
             <h2>Movimientos de la cuenta</h2>
-            <span class="bankId"></span>
-            <span class="accId"></span>
+            <div class="row" style="font-size: 2em; font-weight: bold;">
+              <div class="col-md-6 bankId"></div>
+              <div class="col-md-6 accId"></div>
+            </div>
+            <table><tr><td>Selecciona la cuenta que desees</td></tr></table>
           </div>
         </div>
+        <div class="col-md-1"></div>
       </div>
     </div>
 
