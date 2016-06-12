@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers("/v2/api-docs", "/console").permitAll().anyRequest().fullyAuthenticated().and()
 				.formLogin().permitAll().and().logout().permitAll();
-		// .and().formLogin().loginPage("login");
+
 	}
 
 	@Configuration

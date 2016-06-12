@@ -16,8 +16,8 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import com.hackaton.psd2.dao.model.CredentialInfo;
 import com.hackaton.psd2.dao.repository.CredentialInfoRepository;
+import com.hackaton.psd2.security.UserTokenMgr;
 import com.hackaton.psd2.security.impl.TokenMapImpl;
-import com.hackaton.psd2.security.impl.UserTokenMgrImpl;
 
 public class TokenFilter extends GenericFilterBean {
 
@@ -30,6 +30,9 @@ public class TokenFilter extends GenericFilterBean {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	UserTokenMgr userTokenMgrImpl;
 
 	public TokenFilter(TokenMapImpl tokenMap) {
 		this.tokenMap = tokenMap;
@@ -52,7 +55,7 @@ public class TokenFilter extends GenericFilterBean {
 //					findOne = jdbcTemplate.queryForObject("SELECT * FROM crentialInfo WHERE UID=\"" + user + "\";", CredentialInfo.class);
 
 				tokenMap.setUserToken(user,
-						UserTokenMgrImpl.getUserToken(findOne != null ? findOne.getUserRemote() : "cesinrm@gmail.com",
+						userTokenMgrImpl.getUserToken(findOne != null ? findOne.getUserRemote() : "cesinrm@gmail.com",
 								findOne != null ? findOne.getPassRemote() : "falcons666"));
 			}
 		} catch (Exception e) {

@@ -23,7 +23,8 @@ public class ContahackApplicationTests {
 	public void checkGenTokenCorrect() {
 		String token=null;
 		try {
-			token = UserTokenMgrImpl.getUserToken("alberto.gonzalez.perez.x.x@example.com", "b95eb3");
+
+			token = new UserTokenMgrImpl().getUserToken("alberto.gonzalez.perez.x.x@example.com", "b95eb3");
 			System.out.println("[checkGenTokenCorrect] Token generated: "+token);
 		} catch (LoginException e) {
 			System.out.println("[checkGenTokenCorrect] Oops! "+e.getMessage());
@@ -34,7 +35,7 @@ public class ContahackApplicationTests {
 	public void checkGenTokenIncorrect() {
 		String token=null;
 		try {
-			token = UserTokenMgrImpl.getUserToken("alberto.gonzalez.perez.x.x@example.com", "xxxx");
+			token = new UserTokenMgrImpl().getUserToken("alberto.gonzalez.perez.x.x@example.com", "xxxx");
 			System.out.println("[checkGenTokenCorrect] Token generated: "+token);
 		} catch (LoginException e) {
 			System.out.println("[checkGenTokenCorrect] Oops! "+e.getMessage());
