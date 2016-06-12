@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 /**
@@ -39,7 +38,6 @@ public class JdbcInitialCharge implements CommandLineRunner {
 		populator.addScript(new ClassPathResource(schemaLocation));
 		populator.setContinueOnError(false);
 		populator.populate(dataSource.getConnection());
-//		DatabasePopulatorUtils.execute(populator, this.dataSource);
 	}
 
 }

@@ -1,19 +1,19 @@
 DROP TABLE crentialInfo IF EXISTS;
-CREATE TABLE crentialInfo(uid VARCHAR(30), user_remote VARCHAR(255), pass_remote VARCHAR(255));
+CREATE TABLE crentialInfo(uid VARCHAR(30), user_remote VARCHAR(255), pass_remote VARCHAR(255), PRIMARY KEY (UID));
 
 DROP TABLE customers IF EXISTS;
-CREATE TABLE customers(uid VARCHAR(30), first_name VARCHAR(255), last_name VARCHAR(255));
+CREATE TABLE customers(uid VARCHAR(30), first_name VARCHAR(255), last_name VARCHAR(255), PRIMARY KEY (UID));
 
 
 DROP TABLE agrupaciones IF EXISTS;
-CREATE TABLE agrupaciones(name VARCHAR(255), description VARCHAR(255));
+CREATE TABLE agrupaciones(name VARCHAR(255), description VARCHAR(255), PRIMARY KEY (NAME));
 
 
 DROP TABLE tags IF EXISTS;
-CREATE TABLE tags(name VARCHAR(255), description VARCHAR(255));
+CREATE TABLE tags(name VARCHAR(255), description VARCHAR(255), PRIMARY KEY (NAME));
 
 
-DROP TABLE agrupaciones2tags IF EXISTS;
+DROP TABLE tags2agrupaciones IF EXISTS;
 CREATE TABLE tags2agrupaciones(agrupacion VARCHAR(255), tags VARCHAR(255));
 
 
