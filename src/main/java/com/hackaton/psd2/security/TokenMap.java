@@ -18,8 +18,8 @@ public class TokenMap {
     }
 
     public String getUserToken(String user) {
-        //return TOKENS.get(user);
-        return TOKEN;
+        return TOKENS.get(user);
+        //return TOKEN;
     }
 
 }

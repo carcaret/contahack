@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
@@ -19,6 +21,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
  * Initialization of database
  */
 @Configuration
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class JdbcInitialCharge implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(JdbcInitialCharge.class);
@@ -31,10 +34,12 @@ public class JdbcInitialCharge implements CommandLineRunner {
 
 		LOG.info("Creating tables");
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.setIgnoreFailedDrops(false);
 		String schemaLocation = "/CONTAHACK.sql";
 		populator.addScript(new ClassPathResource(schemaLocation));
 		populator.setContinueOnError(false);
-		DatabasePopulatorUtils.execute(populator, this.dataSource);
+		populator.populate(dataSource.getConnection());
+//		DatabasePopulatorUtils.execute(populator, this.dataSource);
 	}
 
 }

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.servlet.Filter;
 
@@ -21,6 +23,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.hackaton.psd2"})
 @EnableSwagger2
+@EnableJpaRepositories(basePackages={"com.hackaton.psd2.dao.repository"})
+@EntityScan("com.hackaton.psd2.dao.model")
 public class ContahackApplication {
 
   @Autowired
@@ -40,7 +44,7 @@ public class ContahackApplication {
   public FilterRegistrationBean tokenFilterRegistration() {
     FilterRegistrationBean registration = new FilterRegistrationBean();
     registration.setFilter(tokenFilter());
-    registration.addUrlPatterns("/*");
+    registration.addUrlPatterns("/index.html");
     registration.setName("tokenFilter");
     registration.setOrder(1);
     return registration;
