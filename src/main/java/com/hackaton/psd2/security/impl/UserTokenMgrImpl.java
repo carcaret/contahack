@@ -1,16 +1,16 @@
-package com.hackaton.psd2.security;
-
-import javax.security.auth.login.LoginException;
-
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpStatusCodeException;
+package com.hackaton.psd2.security.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hackaton.psd2.rest.RSClient;
 import com.hackaton.psd2.rest.RSResponse;
 
-public class UserTokenMgr {
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpStatusCodeException;
+
+import javax.security.auth.login.LoginException;
+
+public class UserTokenMgrImpl {
 
   final private static String LOGIN_URL = "https://apisandbox.openbankproject.com/my/logins/direct";
   final private static String MY_API_KEY = "c423yqe1jrttsenrp1sqdbuisb5zixze33ogoom5";
