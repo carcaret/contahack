@@ -1,10 +1,6 @@
 package com.hackaton.psd2.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.hackaton.psd2.helper.URIs;
-import com.hackaton.psd2.rest.RSClient;
-import com.hackaton.psd2.rest.RSResponse;
-import com.hackaton.psd2.security.TokenMap;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.hackaton.psd2.helper.URIs;
+import com.hackaton.psd2.rest.RSClient;
+import com.hackaton.psd2.rest.RSResponse;
+import com.hackaton.psd2.security.impl.TokenMapImpl;
 
 @RestController
 public class TransactionsController {
@@ -24,7 +24,7 @@ public class TransactionsController {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
-  private TokenMap tokenMap;
+  private TokenMapImpl tokenMap;
 
   private final String BANK_ID = "rbs";
   private final String ACCOUNT_ID = "5dHBvPFLLbnnBi2fOYOy";

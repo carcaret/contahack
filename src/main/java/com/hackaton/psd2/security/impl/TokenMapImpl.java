@@ -20,10 +20,11 @@ public class TokenMapImpl implements TokenMap {
     TOKENS.put(user, token);
   }
 
+
   @Override
   public String getUserToken(String user) {
-    // return TOKENS.get(user);
-    return TOKEN;
+     return TOKENS.get(user);
+//    return TOKEN;
   }
 
 }

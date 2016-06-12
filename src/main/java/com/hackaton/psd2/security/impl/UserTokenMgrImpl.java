@@ -7,12 +7,15 @@ import com.hackaton.psd2.security.UserTokenMgr;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import javax.security.auth.login.LoginException;
 
+@Component
 public class UserTokenMgrImpl implements UserTokenMgr {
 
+	
   final private static String LOGIN_URL = "https://apisandbox.openbankproject.com/my/logins/direct";
   final private static String MY_API_KEY = "c423yqe1jrttsenrp1sqdbuisb5zixze33ogoom5";
 

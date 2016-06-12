@@ -1,6 +1,6 @@
 package com.hackaton.psd2;
 
-import com.hackaton.psd2.security.impl.UserTokenMgrImpl;
+import javax.security.auth.login.LoginException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.security.auth.login.LoginException;
+import com.hackaton.psd2.security.impl.UserTokenMgrImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ContahackApplication.class)
@@ -23,6 +23,7 @@ public class ContahackApplicationTests {
 	public void checkGenTokenCorrect() {
 		String token=null;
 		try {
+
 			token = new UserTokenMgrImpl().getUserToken("alberto.gonzalez.perez.x.x@example.com", "b95eb3");
 			System.out.println("[checkGenTokenCorrect] Token generated: "+token);
 		} catch (LoginException e) {

@@ -1,6 +1,6 @@
 package com.hackaton.psd2.rest;
 
-import com.hackaton.psd2.security.impl.UserTokenMgrImpl;
+import javax.security.auth.login.LoginException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import javax.security.auth.login.LoginException;
+import com.hackaton.psd2.security.impl.UserTokenMgrImpl;
 
 public class RSClientTest {
 
