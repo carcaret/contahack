@@ -55,11 +55,11 @@ public class TagController {
       RSClient client = new RSClient.Builder(URIs.TAGS).contentType(MediaType.APPLICATION_JSON)
           .token(tokenMap.getUserToken("")).method(HttpMethod.POST).body(json).build();
       RSResponse response = client.send();
-      if (response.getStatus() == HttpStatus.OK) {
+      if (response.getStatus() == HttpStatus.CREATED) {
         return response.getJson().get();
       } else {
         return MAPPER
-            .readTree("{\"error\": \"No se pudo recuperar los tags de la cuenta indicada\"}");
+            .readTree("{\"error\": \"No se pudo crear el tag\"}");
       }
     } catch (Exception e) {
       throw new RuntimeException(e);
