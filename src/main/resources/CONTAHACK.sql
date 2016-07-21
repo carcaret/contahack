@@ -18,7 +18,7 @@ CREATE TABLE tags2agrupaciones(agrupacion VARCHAR(255), tags VARCHAR(255));
 
 
 
-INSERT INTO customers(uid, first_name, last_name) VALUES ('cesinrm','Cesar','Rodriguez');
+INSERT INTO customers(uid, first_name, last_name) VALUES ('ces','Cesa','Rod');
 
 
 INSERT INTO crentialInfo(uid, user_remote, pass_remote) VALUES ('cesinrm','@gmail.com','');
