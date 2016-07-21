@@ -21,7 +21,7 @@ CREATE TABLE tags2agrupaciones(agrupacion VARCHAR(255), tags VARCHAR(255));
 INSERT INTO customers(uid, first_name, last_name) VALUES ('cesinrm','Cesar','Rodriguez');
 
 
-INSERT INTO crentialInfo(uid, user_remote, pass_remote) VALUES ('cesinrm','cesinrm@gmail.com','falcons666');
+INSERT INTO crentialInfo(uid, user_remote, pass_remote) VALUES ('cesinrm','@gmail.com','');
 
 INSERT INTO agrupaciones(name, description) VALUES ('Gastos generales','Esto son los gastos generales');
 INSERT INTO agrupaciones(name, description) VALUES ('Ingresos','Esto son los gastos pareja');
